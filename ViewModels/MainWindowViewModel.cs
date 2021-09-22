@@ -37,6 +37,14 @@ namespace CountryParseNetCore.ViewModels
             get => databaseCountryList;
             set => Set(ref databaseCountryList, value);
         }
+
+        private string _Status = "Ready";
+        public string Status
+        {
+            get => _Status;
+            set => Set(ref _Status, value);
+        }
+        
         #endregion
 
         #region Команды
@@ -50,7 +58,11 @@ namespace CountryParseNetCore.ViewModels
             }
             catch
             {
-                CountryToFind = "Not found";
+                Status = $"{CountryToFind} not found";
+            }
+            finally
+            {
+                CountryToFind = "";
             }
         }
 
@@ -63,31 +75,27 @@ namespace CountryParseNetCore.ViewModels
             }
 
             Country country = dataContext.Countries
-                .Where(c => c.Name == FoundCountry.Name)
-                .FirstOrDefault();
+                .FirstOrDefault(c => c.Name == FoundCountry.Name);
             return country == null;
         }
         private void OnSaveCountryCommand(object parameter)
         {
             Capital capital = dataContext.Capitals
-                .Where(c => c.Name == FoundCountry.Capital)
-                .FirstOrDefault();
+                .FirstOrDefault(c => c.Name == FoundCountry.Capital);
             if (capital == null)
             {
                 capital = new Capital() { Name = FoundCountry.Capital };
             }
 
             Region region = dataContext.Regions
-                .Where(r => r.Name == FoundCountry.Region)
-                .FirstOrDefault();
+                .FirstOrDefault(r => r.Name == FoundCountry.Region);
             if (region == null)
             {
                 region = new Region() { Name = FoundCountry.Region };
             }
 
             Country country = dataContext.Countries
-                .Where(c => c.Name == FoundCountry.Capital)
-                .FirstOrDefault();
+                .FirstOrDefault(c => c.Name == FoundCountry.Capital);
             if (country == null)
             {
                 country = new Country()

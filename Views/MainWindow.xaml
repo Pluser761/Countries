@@ -9,64 +9,68 @@
         DataContext="{Binding Path=MainWindowModel, Source={StaticResource ResourceKey=Locator}}"
         Title="Country Finder"
         Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="4*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
-        </Grid.RowDefinitions>
-        <Border Margin="20" Padding="5" BorderThickness="1" BorderBrush="SlateGray" Grid.Column="0" Grid.Row="0">
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Label>Enter country name</Label>
-                <TextBox Margin="0,5,0,5" Text="{Binding CountryToFind}"></TextBox>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Padding="3" Grid.Column="1" Command="{Binding FindCountryCommand}">Find</Button>
-                </Grid>
-            </StackPanel>
-        </Border>
-        <Grid Margin="20" Grid.Column="0" Grid.Row="1">
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem Content="{Binding Status}"></StatusBarItem>
+        </StatusBar>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="4*"/>
                 <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <ListBox BorderThickness="1" BorderBrush="SlateGray"
+            <Border Margin="20" Padding="5" BorderThickness="1" BorderBrush="SlateGray" Grid.Column="0" Grid.Row="0">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Label>Enter country name</Label>
+                    <TextBox Margin="0,5,0,5" Text="{Binding CountryToFind}"></TextBox>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Padding="3" Grid.Column="1" Command="{Binding FindCountryCommand}">Find</Button>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <Grid Margin="20" Grid.Column="0" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <ListBox BorderThickness="1" BorderBrush="SlateGray"
                  HorizontalContentAlignment="Left" VerticalAlignment="Center" Grid.Row="0"
                  ItemsSource="{Binding FoundCountry}">
-                <StackPanel Orientation="Horizontal">
-                    <Label>Country</Label>
-                    <Label Content="{Binding FoundCountry.Name}"></Label>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label>Code</Label>
-                    <Label Content="{Binding FoundCountry.Code}"></Label>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label>Capital</Label>
-                    <Label Content="{Binding FoundCountry.Capital}"></Label>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label>Area</Label>
-                    <Label Content="{Binding FoundCountry.Area}"></Label>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label>Population</Label>
-                    <Label Content="{Binding FoundCountry.Population}"></Label>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label>Region</Label>
-                    <Label Content="{Binding FoundCountry.Region}"></Label>
-                </StackPanel>
-            </ListBox>
-            <Button HorizontalAlignment="Right" Margin="10" Command="{Binding SaveCountryCommand}" Grid.Row="1">Save to database</Button>
-        </Grid>
-        <DataGrid ItemsSource="{Binding DatabaseCountryList, UpdateSourceTrigger=PropertyChanged}"
+                    <StackPanel Orientation="Horizontal">
+                        <Label>Country</Label>
+                        <Label Content="{Binding FoundCountry.Name}"></Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>Code</Label>
+                        <Label Content="{Binding FoundCountry.Code}"></Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>Capital</Label>
+                        <Label Content="{Binding FoundCountry.Capital}"></Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>Area</Label>
+                        <Label Content="{Binding FoundCountry.Area}"></Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>Population</Label>
+                        <Label Content="{Binding FoundCountry.Population}"></Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>Region</Label>
+                        <Label Content="{Binding FoundCountry.Region}"></Label>
+                    </StackPanel>
+                </ListBox>
+                <Button HorizontalAlignment="Right" Margin="10" Command="{Binding SaveCountryCommand}" Grid.Row="1">Save to database</Button>
+            </Grid>
+            <DataGrid ItemsSource="{Binding DatabaseCountryList, UpdateSourceTrigger=PropertyChanged}"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   Margin="20" Padding="5"
@@ -77,14 +81,15 @@
                   VerticalGridLinesBrush="DarkGray"
                   AlternatingRowBackground="LightGray"
                   Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Code" Binding="{Binding Code}"/>
-                <DataGridTextColumn Header="Capital" Binding="{Binding CountryCapital.Name}"/>
-                <DataGridTextColumn Header="Area" Binding="{Binding Area}"/>
-                <DataGridTextColumn Header="Population" Binding="{Binding Population}"/>
-                <DataGridTextColumn Header="Region" Binding="{Binding CountryRegion.Name}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Code" Binding="{Binding Code}"/>
+                    <DataGridTextColumn Header="Capital" Binding="{Binding CountryCapital.Name}"/>
+                    <DataGridTextColumn Header="Area" Binding="{Binding Area}"/>
+                    <DataGridTextColumn Header="Population" Binding="{Binding Population}"/>
+                    <DataGridTextColumn Header="Region" Binding="{Binding CountryRegion.Name}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </DockPanel>
 </Window>
