@@ -1,4 +1,4 @@
-﻿using CountryParse.Models;
+﻿using CountryParseNetCore.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

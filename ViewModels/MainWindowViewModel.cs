@@ -1,6 +1,4 @@
-﻿using CountryParse.Models;
-using CountryParse.Models.Adapter;
-using CountryParseNetCore.Commands;
+﻿using CountryParseNetCore.Commands;
 using CountryParseNetCore.Services;
 using CountryParseNetCore.Services.Utils;
 using CountryParseNetCore.ViewModels.Base;
@@ -8,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
+using CountryParseNetCore.Models;
+using CountryParseNetCore.Models.Adapter;
 
 namespace CountryParseNetCore.ViewModels
 {

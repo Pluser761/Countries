@@ -4,7 +4,7 @@ using System.IO;
 using System.Net;
 using System.Text.Json;
 
-using CountryParse.Models.Adapter;
+using CountryParseNetCore.Models.Adapter;
 using Microsoft.Extensions.Configuration;
 
 namespace CountryParseNetCore.Services
@@ -12,7 +12,7 @@ namespace CountryParseNetCore.Services
     internal class ApiService
     {
         private readonly IConfiguration configuration;
-        private const string sourceUrl = @"https://restcountries.com/v3";
+        private const string sourceUrl = @"https://restcountries.com/v2";
         private readonly JsonSerializerOptions options = new JsonSerializerOptions();
 
         public DataNode GetCityByName(string name)

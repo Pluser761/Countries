@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CountryParse.Models
+namespace CountryParseNetCore.Models
 {
     public class Capital
     {
