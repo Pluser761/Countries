@@ -12,15 +12,14 @@ namespace CountryParseNetCore.Services
     internal class ApiService
     {
         private readonly IConfiguration configuration;
-        private const string sourceUrl = @"http://api.countrylayer.com/v2";
+        private const string sourceUrl = @"https://restcountries.com/v3";
         private readonly JsonSerializerOptions options = new JsonSerializerOptions();
 
         public DataNode GetCityByName(string name)
         {
-            var token = configuration.GetSection("ApiService")["Token"];
             StreamReader streamReader = new StreamReader(
                 ((HttpWebResponse)WebRequest
-                .Create($"{sourceUrl}/name/{name}?access_key={token}") //создаем запрос
+                .Create($"{sourceUrl}/name/{name}") //создаем запрос
                 .GetResponse()) //выполняем его
                 .GetResponseStream() //получаем поток ввода благодаря касту в HttpWebResponse
                 );
